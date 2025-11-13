@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Break Planner — Equipo Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Break<span>Planner</span></div>
+
+      <div class="panel">
+        <h3>Equipo</h3>
+        <div id="teamList" class="team-list"></div>
+        <div class="row">
+          <input id="newMember" type="text" placeholder="Agregar nombre…" />
+          <button id="addMember" class="btn sm">+</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Parámetros</h3>
+        <div class="field">
+          <label>Fecha</label>
+          <input type="date" id="datePicker">
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Inicio</label>
+            <input type="time" id="startTime" value="09:00">
+          </div>
+          <div class="field">
+            <label>Fin</label>
+            <input type="time" id="endTime" value="18:00">
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Duración</label>
+            <select id="slotMinutes">
+              <option value="15" selected>15 min</option>
+              <option value="10">10 min</option>
+              <option value="20">20 min</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Máx simultáneos</label>
+            <input type="number" id="maxConcurrent" min="1" max="4" value="1">
+          </div>
+        </div>
+        <div class="field">
+          <label>Separación mínima entre breaks</label>
+          <select id="minGap">
+            <option value="90">90 min</option>
+            <option value="120" selected>120 min</option>
+            <option value="150">150 min</option>
+          </select>
+        </div>
+        <div class="grid2">
+          <button id="autoPlan" class="btn">Auto-plan</button>
+          <button id="clearPlan" class="btn ghost">Limpiar</button>
+        </div>
+        <div class="grid2">
+          <button id="saveDay" class="btn">Guardar</button>
+          <button id="loadDay" class="btn ghost">Cargar</button>
+        </div>
+        <button id="exportCsv" class="btn full">Exportar CSV</button>
+      </div>
+
+      <div class="panel small">
+        <p class="muted">Tip: clic en una celda para asignar/quitar un break manualmente.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Agenda de breaks</h1>
+          <p class="muted">Dos breaks por persona · sin choques · pastel vibes</p>
+        </div>
+        <div class="avatar">🙂</div>
+      </header>
+
+      <section class="calendar-wrap">
+        <div id="calendarHeader" class="calendar-header"></div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+
+      <section class="legend">
+        <div class="tag">Break asignado</div>
+        <div class="tag alt">Disponible</div>
+      </section>
+    </main>
+  </div>
+
+  <template id="memberTmpl">
+    <div class="member">
+      <span class="dot"></span>
+      <span class="name"></span>
+      <button class="icon" data-action="up" title="Subir">▲</button>
+      <button class="icon" data-action="down" title="Bajar">▼</button>
+      <button class="icon danger" data-action="remove" title="Quitar">✕</button>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
